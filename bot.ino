@@ -63,7 +63,7 @@ void setup() {
 
 void loop() {
   
-    if (analogRead(LTL) > 600 && analogRead(LTR) > 600) {
+    /*if (analogRead(LTL) > 600 && analogRead(LTR) > 600) {
       left();
       stats();
     }
@@ -77,7 +77,7 @@ void loop() {
       right();
       delay(200);  
       stats();
-    }
+    }*/
     
   // Flame Detector
 
@@ -86,27 +86,42 @@ void loop() {
    * While the Fire is not detected keep searching for the flame until it is detected
    */
   
-  /*
+  
     while (analogRead(HEAT) > 1010) {
-    Serial.println("    Candle not close");
+      if (analogRead(LTL) > 600 && analogRead(LTR) > 600) {
+        left();
+        stats();
+      }
+      
+      else if (analogRead(LTM) > 400) {
+        forward();
+        stats();
+      }
+  
+      else {
+        right();
+        delay(200);  
+        stats();
+      }
     stats();
     
   }
 
   // If the flame is close start the encounter to the flame
 
-  if (analogRead(HEAT) < 1010) {
-    Serial.println("    Candle is close");
-
-    // Candle is very close and over te wet towel
-
-    if (analogRead(HEAT) < 1005) {
+    if (analogRead(HEAT) <= 1011 && analogRead(HEAT) > 984) {
+      Serial.println("    Candle is close");
+      
+    }
+      // Candle is very close and over te wet towel
+  
+    if (analogRead(HEAT) <= 985) {
       Serial.println("    Candle can be extinguished");
     }
+      
+      stats();
     
-    stats();
-  }
-  */
+  
 }
 
 // Functions must be declared outside of the main loop in an arduino sketch
@@ -128,7 +143,7 @@ void stats() {
   Serial.println(analogRead(HEAT));
 }
 
-// Foward
+// Forward
 
 void forward() {
   digitalWrite(STBY, HIGH);
