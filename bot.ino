@@ -18,6 +18,8 @@
 
  #include <Servo.h>
 
+// Make sure to fold the towel into a square and put it on the right side
+
 // Line tracker module
 
 // Line tracker module sensor left
@@ -98,43 +100,35 @@ void loop() {
       if (analogRead(LTL) > 600 && analogRead(LTR) > 600) {
         left();
         stats();
-        
       }
       
       else if (analogRead(LTM) > 400) {
         forward();
         stats();
       }
-  
       else {
         right();
         delay(200);  
         stats();
       }
     stats();
-
-    
   }
 
   // If the flame is close start the encounter to the flame
 
-    if (analogRead(HEAT) <= 1011 && analogRead(HEAT) > 984) {
+    if (analogRead(HEAT) <= 1011 && analogRead(HEAT) > 983) {
       Serial.println("    Candle is close");
       forward();
-      
     }
 
   
-    if (analogRead(HEAT) <= 985) {
+    if (analogRead(HEAT) <= 984) {
       Serial.println("    Candle can be extinguished");
       breaks();
-      srvo.write(90);
+      srvo.write(80);
       delay(1000);
-    }
-      
+    }   
       stats();
-    
-  
 }
 
 // Functions must be declared outside of the main loop in an arduino sketch
