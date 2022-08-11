@@ -49,7 +49,7 @@
 
 #define SERVO 10
 
-#define SPEED 35
+#define SPEED 30
 
 Servo srvo;
 
