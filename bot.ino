@@ -71,6 +71,8 @@ void setup() {
 }
 
 void loop() {
+
+    // Regular maze tracking
   
     /*if (analogRead(LTL) > 600 && analogRead(LTR) > 600) {
       left();
