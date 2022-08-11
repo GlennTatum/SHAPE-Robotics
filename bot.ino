@@ -16,6 +16,7 @@
  * 
  */
 
+ #include <Servo.h>
 
 // Line tracker module
 
@@ -44,7 +45,11 @@
 // LEFT motor voltage control
 #define BI 7
 
+#define SERVO 10
+
 #define SPEED 35
+
+Servo srvo;
 
 void setup() {
   Serial.begin(9600);
@@ -59,6 +64,8 @@ void setup() {
   pinMode(PWMB, OUTPUT);
   pinMode(AI, OUTPUT);
   pinMode(BI, OUTPUT);
+
+  srvo.attach(10);
 }
 
 void loop() {
@@ -86,11 +93,12 @@ void loop() {
    * While the Fire is not detected keep searching for the flame until it is detected
    */
   
-  
+    srvo.write(160);
     while (analogRead(HEAT) > 1010) {
       if (analogRead(LTL) > 600 && analogRead(LTR) > 600) {
         left();
         stats();
+        
       }
       
       else if (analogRead(LTM) > 400) {
@@ -104,6 +112,7 @@ void loop() {
         stats();
       }
     stats();
+
     
   }
 
@@ -111,12 +120,16 @@ void loop() {
 
     if (analogRead(HEAT) <= 1011 && analogRead(HEAT) > 984) {
       Serial.println("    Candle is close");
+      forward();
       
     }
-      // Candle is very close and over te wet towel
+
   
     if (analogRead(HEAT) <= 985) {
       Serial.println("    Candle can be extinguished");
+      breaks();
+      srvo.write(90);
+      delay(1000);
     }
       
       stats();
