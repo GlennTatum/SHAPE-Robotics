@@ -114,15 +114,18 @@ void loop() {
     stats();
   }
 
+  // Adjusted for a 2.5 inch candle
+
   // If the flame is close start the encounter to the flame
 
-    if (analogRead(HEAT) <= 1011 && analogRead(HEAT) > 983) {
+    if (analogRead(HEAT) <= 1011 && analogRead(HEAT) > 915) {
       Serial.println("    Candle is close");
       forward();
+
     }
 
   
-    if (analogRead(HEAT) <= 984) {
+    if (analogRead(HEAT) <= 916) {
       Serial.println("    Candle can be extinguished");
       breaks();
       srvo.write(80);
