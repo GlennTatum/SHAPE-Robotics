@@ -49,7 +49,7 @@
 
 #define SERVO 10
 
-#define SPEED 30
+#define SPEED 35
 
 Servo srvo;
 
@@ -99,7 +99,7 @@ void loop() {
   
     srvo.write(160);
     while (analogRead(HEAT) > 1010) {
-      if (analogRead(LTL) > 600 && analogRead(LTR) > 600) {
+      if (analogRead(LTL) > 550 && analogRead(LTR) > 600) {
         left();
         stats();
       }
@@ -109,8 +109,7 @@ void loop() {
         stats();
       }
       else {
-        right();
-        delay(200);  
+        right(); 
         stats();
       }
     stats();
@@ -120,14 +119,13 @@ void loop() {
 
   // If the flame is close start the encounter to the flame
 
-    if (analogRead(HEAT) <= 1011 && analogRead(HEAT) > 915) {
+    if (analogRead(HEAT) <= 1011 && analogRead(HEAT) > 939) {
       Serial.println("    Candle is close");
       forward();
 
     }
 
-  
-    if (analogRead(HEAT) <= 916) {
+    if (analogRead(HEAT) <= 940) {
       Serial.println("    Candle can be extinguished");
       breaks();
       srvo.write(80);
