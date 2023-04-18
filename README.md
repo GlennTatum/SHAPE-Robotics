@@ -10,3 +10,5 @@ students learn principles of solid modeling, sensor technology and locomotion.
 
 
 [Watch it in action](https://vimeo.com/738434074)
+
+[Watch it deployed in production! 😄](https://vimeo.com/818934747)
